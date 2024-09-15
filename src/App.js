@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import IncidentList from './components/IncidentList';
+import IncidentForm from './components/IncidentForm';
 
-function App() {
+const App = () => {
+  const [currentIncident, setCurrentIncident] = useState(null);
+
+  const handleEdit = (incident) => {
+    setCurrentIncident(incident);
+  };
+
+  const handleSave = () => {
+    setCurrentIncident(null);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Incident Management System</h1>
+      <IncidentForm currentIncident={currentIncident} onSave={handleSave} />
+      <IncidentList onEdit={handleEdit} />
     </div>
   );
-}
+};
 
 export default App;
